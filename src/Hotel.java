@@ -7,17 +7,10 @@ public class Hotel {
     private SortedList<Kamar> daftarKamar;
     private SortedList<Tamu> daftarTamu;
     private SortedList<Reservasi> daftarReservasi;
-
-    /**
-     * Konstruktor default.
-     */
+    
     public Hotel() {
         this("Xian Hotel", 10);
     }
-
-    /**
-     * Konstruktor dengan nama hotel dan kapasitas.
-     */
     public Hotel(String namaHotel, int kapasitas) {
 
         if (namaHotel == null || namaHotel.trim().isEmpty()) {
@@ -58,10 +51,7 @@ public class Hotel {
             )
         );
     }
-
-    /**
-     * Menambahkan kamar ke dalam daftar.
-     */
+    
     public boolean tambahKamar(Kamar kamar) {
         try {
             if (kamar == null) {
@@ -91,9 +81,7 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menambahkan tamu ke dalam daftar.
-     */
+    
     public boolean tambahTamu(Tamu tamu) {
         try {
             if (tamu == null) {
@@ -123,9 +111,7 @@ public class Hotel {
         }
     }
 
-    /**
-     * Mencari kamar berdasarkan nomor kamar.
-     */
+ 
     public Kamar cariKamar(int nomor) {
         try {
             Kamar kunci = new Kamar(
@@ -151,9 +137,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Membuat reservasi baru.
-     */
     public boolean buatReservasi(Reservasi reservasi) {
         try {
             if (reservasi == null) {
@@ -163,7 +146,6 @@ public class Hotel {
                 return false;
             }
 
-            // Memeriksa nomor reservasi duplikat
             if (daftarReservasi.search(reservasi) != -1) {
                 System.out.println(
                     "Nomor reservasi sudah digunakan."
@@ -171,7 +153,7 @@ public class Hotel {
                 return false;
             }
 
-            // Memeriksa kapasitas daftar
+            
             if (daftarReservasi.isFull()) {
                 System.out.println(
                     "Daftar reservasi sudah penuh."
@@ -179,7 +161,7 @@ public class Hotel {
                 return false;
             }
 
-            // Memeriksa kamar terdaftar
+          
             Kamar kamar = reservasi.getKamar();
 
             if (kamar == null) {
@@ -200,7 +182,7 @@ public class Hotel {
                 return false;
             }
 
-            // Memeriksa tamu terdaftar
+           
             Tamu tamu = reservasi.getTamu();
 
             if (tamu == null) {
@@ -221,7 +203,7 @@ public class Hotel {
                 return false;
             }
 
-            // Mengonfirmasi reservasi
+            
             if (!reservasi.konfirmasi()) {
                 System.out.println(
                     "Reservasi gagal dikonfirmasi. " +
@@ -230,7 +212,7 @@ public class Hotel {
                 return false;
             }
 
-            // Memasukkan reservasi ke daftar
+          
             if (daftarReservasi.insert(reservasi)) {
                 System.out.println(
                     "Reservasi berhasil dibuat."
@@ -238,7 +220,7 @@ public class Hotel {
                 return true;
             }
 
-            // Mengembalikan status kamar jika insert gagal
+          
             reservasi.batalkan();
 
             System.out.println(
@@ -256,9 +238,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Membatalkan reservasi berdasarkan nomor.
-     */
     public boolean batalkanReservasi(int nomor) {
         try {
             for (int i = 0; i < daftarReservasi.size(); i++) {
@@ -308,9 +287,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menghapus reservasi secara permanen.
-     */
     public boolean hapusReservasi(int nomor) {
         try {
             for (int i = 0; i < daftarReservasi.size(); i++) {
@@ -356,9 +332,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menampilkan seluruh kamar hotel.
-     */
     public void tampilkanKamar() {
         System.out.println(
             "\n===== DAFTAR KAMAR " + namaHotel + " ====="
@@ -380,9 +353,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menampilkan seluruh tamu hotel.
-     */
     public void tampilkanTamu() {
         System.out.println("\n===== DAFTAR TAMU =====");
 
@@ -402,9 +372,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menampilkan seluruh reservasi hotel.
-     */
     public void tampilkanReservasi() {
         System.out.println("\n===== DAFTAR RESERVASI =====");
 
@@ -424,9 +391,6 @@ public class Hotel {
         }
     }
 
-    /**
-     * Menampilkan ringkasan data hotel.
-     */
     public void tampilkanRingkasan() {
 
         int kamarTersedia = 0;
@@ -448,7 +412,6 @@ public class Hotel {
             }
         }
 
-        // Menghitung jumlah reservasi dan total biaya
         for (int i = 0; i < daftarReservasi.size(); i++) {
 
             Reservasi reservasi = daftarReservasi.get(i);
@@ -467,7 +430,6 @@ public class Hotel {
             }
         }
 
-        // Menampilkan ringkasan
         System.out.println(
             "\n===== RINGKASAN " + namaHotel + " ====="
         );
